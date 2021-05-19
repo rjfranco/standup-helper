@@ -65,5 +65,8 @@
   },
   "ember": {
     "edition": "octane"
+  },
+  "dependencies": {
+    "faunadb": "^4.2.0"
   }
 }
