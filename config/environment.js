@@ -18,6 +18,7 @@ module.exports = function (environment) {
     },
 
     APP: {
+      faunaSecret: process.env.FAUNA_SECRET,
       // Here you can pass flags/options to your application instance
       // when it is created
     },
