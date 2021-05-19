@@ -1,0 +1,7 @@
+{{page-title "Index"}}
+<ul class="people">
+  {{#each @model as |person|}}
+    <li>{{person.name}}</li>
+  {{/each}}
+</ul>
+{{outlet}}
