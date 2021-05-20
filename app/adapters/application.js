@@ -9,10 +9,10 @@ export default class ApplicationAdapter extends Adapter {
   };
 
   createRecord(store, type, snapshot) {
-    let q = faunadb.query;
+    let { Collection, Create } = faunadb.query;
     let data = this.serialize(snapshot);
     return this.fauna.client
-      .query(q.Create(q.Collection(this.typeNames[type.modelName]), { data }))
+      .query(Create(Collection(this.typeNames[type.modelName]), { data }))
       .then((response) => ({ ...response.data, id: response.ref.id }));
   }
 
