@@ -19,6 +19,9 @@ module.exports = {
   env: {
     browser: true,
   },
+  globals: {
+    faunadb: true,
+  },
   rules: {},
   overrides: [
     // node files
