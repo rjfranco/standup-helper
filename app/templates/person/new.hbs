@@ -4,7 +4,7 @@
   <h1>Dev Standup List</h1>
 </header>
 
-<form class="single-line">
+<form class="single-line" onsubmit={{action 'savePerson' preventDefault=true}}>
   <label>
     Name:
     <Input @value={{this.name}} />
