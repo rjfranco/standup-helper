@@ -7,6 +7,7 @@
   --body-font: 'Ideal Sans A', 'Ideal Sans B';
   --body-font-weight: 400;
 
+  --border: .0625rem solid var(--grey-light);
   --border-radius: .25rem;
   --max-document-width: 70rem;
 
@@ -46,7 +47,7 @@ p {
 
 .empty-list {
   background: #fff;
-  border: .0625rem solid var(--grey-light);
+  border: var(--border);
   border-radius: var(--border-radius);
   margin: 3rem auto;
   max-width: calc(var(--max-document-width) - 2rem);
@@ -60,14 +61,67 @@ footer {
   max-width: var(--max-document-width);
 }
 
-.add-person {
+button,
+.button {
   background: #444;
+  border: 0;
   border-radius: var(--border-radius);
   color: #fff;
+  cursor: pointer;
   padding: .75rem 1.5rem;
   text-decoration: none;
 }
 
-.add-person:hover {
+button:hover,
+.button:hover {
   background: #555;
+}
+
+button:disabled,
+.button:disabled {
+  cursor: default;
+  opacity: .25;
+}
+
+form {
+  background: #fff;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  margin: 3rem auto;
+  max-width: calc(var(--max-document-width) - 2rem);
+  padding: 2rem;
+}
+
+form label {
+  color: #555;
+}
+
+form.single-line {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr auto;
+}
+
+form.single-line label input {
+  border: .25rem solid lightgrey;
+  border-radius: var(--border-radius);
+  box-sizing: border-box;
+  color: #444;
+  display: block;
+  font-size: 1.25rem;
+  margin-top: .5rem;
+  outline: none;
+  padding: .5rem .75rem;
+  width: 100%;
+}
+
+form.single-line .actions {
+  align-items: flex-end;
+  display: flex;
+  padding-bottom: .25rem;
+}
+
+form.single-line .actions .button:not(:last-child),
+form.single-line .actions button:not(:last-child) {
+  margin-right: 1rem;
 }

@@ -1,2 +1,20 @@
 {{page-title "New"}}
+
+<header>
+  <h1>Dev Standup List</h1>
+</header>
+
+<form class="single-line">
+  <label>
+    Name:
+    <Input @value={{this.name}} />
+  </label>
+
+  <div class="actions">
+    <LinkTo @route="index" class="button">Cancel</LinkTo>
+    <button type="submit" disabled={{this.hasNoName}}>Save</button>
+  </div>
+</form>
+
+
 {{outlet}}
