@@ -16,14 +16,23 @@ export default class ApplicationAdapter extends Adapter {
       .then((response) => ({ ...response.data, id: response.ref.id }));
   }
 
+  deleteRecord(store, type, snapshot) {
+    let { Delete, Ref, Collection } = faunadb.query;
+    let ref = snapshot.id;
+
+    return this.fauna.client.query(
+      Delete(Ref(Collection(this.typeNames[type.modelName]), ref))
+    );
+  }
+
   findAll(store, type) {
-    let q = faunadb.query;
+    let { Map, Paginate, Match, Index, Lambda, Get, Var } = faunadb.query;
     let typeName = this.typeNames[type.modelName];
     return this.fauna.client
       .query(
-        q.Map(
-          q.Paginate(q.Match(q.Index(`all_${typeName}`))),
-          q.Lambda('X', q.Get(q.Var('X')))
+        Map(
+          Paginate(Match(Index(`all_${typeName}`))),
+          Lambda('X', Get(Var('X')))
         )
       )
       .then((response) => {

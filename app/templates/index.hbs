@@ -6,7 +6,10 @@
 {{#if @model}}
 <ul class="people">
   {{#each @model as |person|}}
-    <li>{{person.name}}</li>
+    <li>
+      <h5>{{person.name}}</h5>
+      <button type="button" {{action "deletePerson" person}}>Delete</button>
+    </li>
   {{/each}}
 </ul>
 {{else}}
