@@ -16,13 +16,16 @@
 
 body,
 html {
-  background: var(--grey-background);
+  /* background: var(--grey-background); */
+  background: linear-gradient(to bottom, rgb(241, 241, 241), rgb(217, 221, 226));
   font-family: var(--body-font);
   font-weight: var(--body-font-weight);
+  height: 100%;
 }
 
 header {
-  background: linear-gradient(to bottom, #fff 60%, rgb(230, 230, 230));
+  /* background: linear-gradient(to bottom, #fff 60%, rgb(230, 230, 230)); */
+  background: #fff;
   border-bottom: .0625rem solid var(--grey-light);
   padding: 2rem;
 }
