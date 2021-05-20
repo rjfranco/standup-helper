@@ -8,6 +8,14 @@ export default class ApplicationAdapter extends Adapter {
     person: 'people',
   };
 
+  createRecord(store, type, snapshot) {
+    let q = faunadb.query;
+    let data = this.serialize(snapshot);
+    return this.fauna.client
+      .query(q.Create(q.Collection(this.typeNames[type.modelName]), { data }))
+      .then((response) => ({ ...response.data, id: response.ref.id }));
+  }
+
   findAll(store, type) {
     let q = faunadb.query;
     let typeName = this.typeNames[type.modelName];
@@ -18,6 +26,8 @@ export default class ApplicationAdapter extends Adapter {
           q.Lambda('X', q.Get(q.Var('X')))
         )
       )
-      .then((response) => response.data);
+      .then((response) => {
+        return response.data.map((obj) => ({ ...obj.data, id: obj.ref.id }));
+      });
   }
 }
