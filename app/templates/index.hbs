@@ -1,7 +1,19 @@
 {{page-title "Index"}}
+<header>
+  <h1>Dev Standup List</h1>
+</header>
+
+{{#if @model}}
 <ul class="people">
   {{#each @model as |person|}}
     <li>{{person.name}}</li>
   {{/each}}
 </ul>
+{{else}}
+  <p class="empty-list">There are no people yet, use the button below to add a person</p>
+{{/if}}
+
+<footer>
+  <LinkTo @route="person.new" class="add-person">Add Person</LinkTo>
+</footer>
 {{outlet}}

@@ -1,0 +1,70 @@
+@import 'normalize.css';
+
+:root {
+  --header-font: 'Chronicle Display A', 'Chronicle Display B';
+  --header-font-weight: 600;
+
+  --body-font: 'Ideal Sans A', 'Ideal Sans B';
+  --body-font-weight: 400;
+
+  --border-radius: .25rem;
+  --max-document-width: 70rem;
+
+  --grey-background: rgb(203, 208, 214);
+  --grey-light: rgb(155, 155, 155);
+}
+
+body,
+html {
+  background: var(--grey-background);
+  font-family: var(--body-font);
+  font-weight: var(--body-font-weight);
+}
+
+header {
+  background: linear-gradient(to bottom, #fff 60%, rgb(230, 230, 230));
+  border-bottom: .0625rem solid var(--grey-light);
+  padding: 2rem;
+}
+
+h1 {
+  color: #444;
+  font-family: var(--header-font);
+  font-weight: var(--header-font-weight);
+  font-size: 3rem;
+  margin: 0 auto;
+  max-width: var(--max-document-width);
+}
+
+p {
+  color: #444;
+  font-size: 1.125rem;
+}
+
+.empty-list {
+  background: #fff;
+  border: .0625rem solid var(--grey-light);
+  border-radius: var(--border-radius);
+  margin: 3rem auto;
+  max-width: calc(var(--max-document-width) - 2rem);
+  padding: 2rem;
+}
+
+footer {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 auto;
+  max-width: var(--max-document-width);
+}
+
+.add-person {
+  background: #444;
+  border-radius: var(--border-radius);
+  color: #fff;
+  padding: .75rem 1.5rem;
+  text-decoration: none;
+}
+
+.add-person:hover {
+  background: #555;
+}
