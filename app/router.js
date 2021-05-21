@@ -1,5 +1,5 @@
 import EmberRouter from '@ember/routing/router';
-import config from 'person-list/config/environment';
+import config from 'standup-helper/config/environment';
 
 export default class Router extends EmberRouter {
   location = config.locationType;
@@ -9,5 +9,9 @@ export default class Router extends EmberRouter {
 Router.map(function () {
   this.route('person', function () {
     this.route('new');
+  });
+
+  this.route('group', { path: '/' }, function () {
+    this.route('show', { path: '/:group_name' });
   });
 });

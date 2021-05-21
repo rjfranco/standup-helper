@@ -2,7 +2,7 @@
 
 module.exports = function (environment) {
   let ENV = {
-    modulePrefix: 'person-list',
+    modulePrefix: 'standup-helper',
     environment,
     rootURL: '/',
     locationType: 'auto',

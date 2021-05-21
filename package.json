@@ -1,8 +1,8 @@
 {
-  "name": "person-list",
+  "name": "standup-helper",
   "version": "0.0.0",
   "private": true,
-  "description": "Small description for person-list goes here",
+  "description": "Small description for standup-helper goes here",
   "repository": "",
   "license": "MIT",
   "author": "",

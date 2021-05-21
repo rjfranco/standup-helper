@@ -1,5 +1,5 @@
-import Application from 'person-list/app';
-import config from 'person-list/config/environment';
+import Application from 'standup-helper/app';
+import config from 'standup-helper/config/environment';
 import * as QUnit from 'qunit';
 import { setApplication } from '@ember/test-helpers';
 import { setup } from 'qunit-dom';
