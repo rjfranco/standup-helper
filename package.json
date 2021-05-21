@@ -1,8 +1,8 @@
 {
-  "name": "flow-person-list",
+  "name": "person-list",
   "version": "0.0.0",
   "private": true,
-  "description": "Small description for flow-person-list goes here",
+  "description": "Small description for person-list goes here",
   "repository": "",
   "license": "MIT",
   "author": "",

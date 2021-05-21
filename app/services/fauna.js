@@ -1,5 +1,5 @@
 import Service from '@ember/service';
-import ENV from 'flow-person-list/config/environment';
+import ENV from 'person-list/config/environment';
 
 export default class FaunaService extends Service {
   constructor() {

@@ -1,5 +1,5 @@
-import Application from 'flow-person-list/app';
-import config from 'flow-person-list/config/environment';
+import Application from 'person-list/app';
+import config from 'person-list/config/environment';
 import * as QUnit from 'qunit';
 import { setApplication } from '@ember/test-helpers';
 import { setup } from 'qunit-dom';

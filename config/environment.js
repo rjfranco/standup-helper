@@ -2,7 +2,7 @@
 
 module.exports = function (environment) {
   let ENV = {
-    modulePrefix: 'flow-person-list',
+    modulePrefix: 'person-list',
     environment,
     rootURL: '/',
     locationType: 'auto',
