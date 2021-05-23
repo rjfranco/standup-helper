@@ -1,2 +1,24 @@
-{{page-title "Show"}}
+{{page-title @model.name}}
+
+<header>
+  <h1>Dev Standup List</h1>
+</header>
+
+{{#if @model.people}}
+  <ul class="people">
+    {{#each @model.people as |person|}}
+      <li>
+        <h5>{{person.name}}</h5>
+        <button type="button" {{action "deletePerson" person}}>Delete</button>
+      </li>
+    {{/each}}
+  </ul>
+{{else}}
+  <p class="empty-list">There are no people yet, use the button below to add a person</p>
+{{/if}}
+
+<footer>
+  <LinkTo @route="group.show.person.new" class="button">Add Person</LinkTo>
+</footer>
+
 {{outlet}}

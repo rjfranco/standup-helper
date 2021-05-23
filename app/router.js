@@ -7,11 +7,11 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function () {
-  this.route('person', function () {
-    this.route('new');
-  });
-
   this.route('group', { path: '/' }, function () {
-    this.route('show', { path: '/:group_name' });
+    this.route('show', { path: '/:group_name' }, function () {
+      this.route('person', function () {
+        this.route('new');
+      });
+    });
   });
 });
