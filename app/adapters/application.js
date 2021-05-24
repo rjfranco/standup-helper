@@ -5,6 +5,7 @@ export default class ApplicationAdapter extends Adapter {
   @service fauna;
 
   typeNames = {
+    group: 'groups',
     person: 'people',
   };
 

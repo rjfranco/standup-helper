@@ -19,4 +19,13 @@ export default class GroupAdapter extends ApplicationAdapter {
       )
     ).then(response => ({ ...response.data[0].data, id: response.data[0].ref.value.id }))
   }
+
+  updateRecord(store, type, snapshot) {
+    let { Get, Index, Match, Select, Update } = faunadb.query;
+    let data = this.serialize(snapshot);
+
+    return this.fauna.client
+      .query(Update(Select('ref', Get(Match(Index('group_by_name'), data.name))), { data }))
+      .then((response) => ({ ...response.data, id: response.ref.id }));
+  }
 }
