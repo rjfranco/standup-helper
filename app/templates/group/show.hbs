@@ -8,6 +8,7 @@
   <ul class="people">
     {{#each this.alphaPeople as |person|}}
       <li>
+        <input class="completed-checkbox" type="checkbox" checked={{person.completed}} />
         <h5>{{person.name}}</h5>
         <button type="button" {{action "deletePerson" person}}>Delete</button>
       </li>
@@ -22,3 +23,4 @@
 </footer>
 
 {{outlet}}
+❤️
