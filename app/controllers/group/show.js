@@ -1,18 +1,17 @@
 import Controller from '@ember/controller';
 import { action } from '@ember/object';
-import { sort } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
 
 export default class GroupShowController extends Controller {
-  @sort('model.people', function(a, b) {
-    if (a.name > b.name) {
-      return 1;
-    } else if (b.name > a.name) {
-      return -1;
-    }
+  @service fauna;
 
-    return 0;
-  })
-  alphaPeople;
+  constructor() {
+    super(...arguments);
+  }
+
+  get alphaPeople() {
+    return this.model?.people?.sortBy('name');
+  }
 
   @action
   deletePerson(person) {

@@ -5,6 +5,6 @@ export default class GroupShowRoute extends Route {
   @service store;
 
   model(params) {
-    return this.store.findRecord('group', params.group_name);
+    return this.store.queryRecord('group', { slug: params.group_name });
   }
 }

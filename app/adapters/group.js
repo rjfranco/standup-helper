@@ -1,23 +1,39 @@
 import ApplicationAdapter from './application';
 import { inject as service } from '@ember/service';
 
-
 export default class GroupAdapter extends ApplicationAdapter {
   @service fauna;
-  
+
   titleize(str) {
     return str.replace(/^[a-z]|-[a-z]/g, (str) => str.toUpperCase());
   }
 
   findRecord(store, type, id) {
-    let { Get, Index, Lambda, Map, Match, Paginate, Var } = faunadb.query;
-    let name = this.titleize(id);
-    return this.fauna.client.query(
-      Map(
-        Paginate(Match(Index('group_by_name'), name)),
-        Lambda('X', Get(Var('X')))
+    let { Collection, Get, Lambda, Map, Ref, Var } = faunadb.query;
+    return this.fauna.client
+      .query(
+        Map(Ref(Collection(type.modelName), id), Lambda('X', Get(Var('X'))))
       )
-    ).then(response => ({ ...response.data[0].data, id: response.data[0].ref.value.id }))
+      .then((response) => ({
+        ...response.data[0].data,
+        id: response.data[0].ref.value.id,
+      }));
+  }
+
+  queryRecord(store, type, { slug }) {
+    let { Get, Index, Lambda, Map, Match, Paginate, Var } = faunadb.query;
+    let name = this.titleize(slug);
+    return this.fauna.client
+      .query(
+        Map(
+          Paginate(Match(Index('group_by_name'), name)),
+          Lambda('X', Get(Var('X')))
+        )
+      )
+      .then((response) => ({
+        ...response.data[0].data,
+        id: response.data[0].ref.value.id,
+      }));
   }
 
   updateRecord(store, type, snapshot) {
@@ -25,7 +41,11 @@ export default class GroupAdapter extends ApplicationAdapter {
     let data = this.serialize(snapshot);
 
     return this.fauna.client
-      .query(Update(Select('ref', Get(Match(Index('group_by_name'), data.name))), { data }))
+      .query(
+        Update(Select('ref', Get(Match(Index('group_by_name'), data.name))), {
+          data,
+        })
+      )
       .then((response) => ({ ...response.data, id: response.ref.id }));
   }
 }
