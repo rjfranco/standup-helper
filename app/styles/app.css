@@ -61,7 +61,7 @@ p {
 footer {
   display: flex;
   justify-content: flex-end;
-  margin: 0 auto;
+  margin: 0 auto 3rem;
   max-width: var(--max-document-width);
 }
 
@@ -74,6 +74,11 @@ button,
   cursor: pointer;
   padding: .75rem 1.5rem;
   text-decoration: none;
+}
+
+footer button:not(:last-child),
+footer .button:not(:last-child) {
+  margin-right: 1rem;
 }
 
 button:hover,
@@ -133,17 +138,21 @@ form.single-line .actions button:not(:last-child) {
 .people {
   list-style: none;
   margin: 3rem auto;
-  max-width: var(--max-document-width);
-  padding: 0;
+  max-width: calc(var(--max-document-width) + 2rem);
+  padding: 0 2rem;
 }
 
 .people li {
   align-items: center;
-  display: flex;
   background: #fff;
   border-radius: var(--border-radius);
-  box-shadow: 0 0 .5rem 0 rgba(0, 0, 0, .15);
+  border: var(--border);
+  display: flex;
   padding: 1rem 1.5rem;
+}
+
+.people li.completed {
+  opacity: .25;
 }
 
 .people li:not(:last-child) {
@@ -159,14 +168,15 @@ form.single-line .actions button:not(:last-child) {
 .completed-checkbox {
   -webkit-appearance: none;
   -moz-appearance: none;
+  background-color: #eee;
+  border-radius: var(--border-radius);
+  border: .0625rem solid #444;
+  cursor: pointer;
+  font-size: 1.25rem;
+  height: 1.25rem;
+  margin-right: 1rem;
   vertical-align: middle;
   width: 1.25rem;
-  height: 1.25rem;
-  font-size: 1.25rem;
-  background-color: #eee;
-  border: .0625rem solid #444;
-  border-radius: var(--border-radius);
-  margin-right: 1rem;
 }
 
 .completed-checkbox:checked:after {
