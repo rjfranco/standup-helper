@@ -3,6 +3,7 @@ import { inject as service } from '@ember/service';
 
 export default class GroupAdapter extends ApplicationAdapter {
   @service fauna;
+  @service store;
 
   watchList = {};
 
@@ -22,6 +23,18 @@ export default class GroupAdapter extends ApplicationAdapter {
       }));
   }
 
+  pushRecord(document) {
+    let { data, ts } = document;
+    let { id } = document.ref.value;
+    this.store.push({
+      data: {
+        id,
+        type: 'group',
+        attributes: { ...data, ts },
+      },
+    });
+  }
+
   queryRecord(store, type, { slug }) {
     let { Get, Index, Lambda, Map, Match, Paginate, Var } = faunadb.query;
     let name = this.titleize(slug);
@@ -29,15 +42,17 @@ export default class GroupAdapter extends ApplicationAdapter {
     return this.fauna.client
       .query(Map(Paginate(query), Lambda('X', Get(Var('X')))))
       .then((response) => {
-        let id = response.data[0].ref.value.id;
+        let { id } = response.data[0].ref.value;
+        let { ts } = response.data[0];
         this.watchRecord(name, id);
-        return { ...response.data[0].data, id };
+        return { ...response.data[0].data, id, ts };
       });
   }
 
   updateRecord(store, type, snapshot) {
     let { Get, Index, Match, Select, Update } = faunadb.query;
     let data = this.serialize(snapshot);
+    delete data.ts; // don't send ts ref back to the store
 
     return this.fauna.client
       .query(
@@ -52,21 +67,17 @@ export default class GroupAdapter extends ApplicationAdapter {
     if (this.watchList[name]) return;
 
     let { Collection, Ref } = faunadb.query;
-    let docRef = Ref(Collection('groups', id));
+    let docRef = Ref(Collection('groups'), id);
+
     this.watchList[name] = this.fauna.client.stream
       .document(docRef)
-      .on('snapshot', (snapshot) => {
-        console.log('Snapshot came in:', snapshot);
-      })
       .on('version', (version) => {
-        console.log('version came in:', version);
+        this.pushRecord(version.document);
       })
       .on('error', (error) => {
-        console.log('Error:', error);
+        console.error('Error:', error);
         this.watchList[name].close();
-        setTimeout(() => {
-          this.watchRecord(name, docRef);
-        }, 1000);
+        delete this.watchList[name];
       })
       .start();
   }
