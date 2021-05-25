@@ -21,10 +21,11 @@ export default class PersonNewController extends Controller {
       name,
       active: false,
       completed: false,
-      uuid: v4()
+      uuid: v4(),
     };
     group.people = [...(group.people || []), person];
     group.save();
     this.router.transitionTo('group.show');
+    this.name = '';
   }
 }
