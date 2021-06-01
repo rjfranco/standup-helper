@@ -63,7 +63,8 @@ footer {
   display: flex;
   justify-content: flex-end;
   margin: 0 auto 3rem;
-  max-width: var(--max-document-width);
+  max-width: calc(var(--max-document-width) + 2rem);
+  padding: 0 2rem;
 }
 
 button,
