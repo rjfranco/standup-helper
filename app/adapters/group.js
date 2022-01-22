@@ -8,7 +8,9 @@ export default class GroupAdapter extends ApplicationAdapter {
   watchList = {};
 
   titleize(str) {
-    return str.replace(/^[a-z]|-[a-z]/g, (str) => str.toUpperCase());
+    return str
+      .replace(/^[a-z]|-[a-z]/g, (str) => str.toUpperCase())
+      .replace(/-/g, ' ');
   }
 
   findRecord(store, type, id) {
