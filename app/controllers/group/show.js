@@ -9,8 +9,8 @@ export default class GroupShowController extends Controller {
     super(...arguments);
   }
 
-  get alphaPeople() {
-    return this.model?.people?.sortBy('name');
+  get sortedPeople() {
+    return this.model?.people?.sortBy('completed', 'name');
   }
 
   @action

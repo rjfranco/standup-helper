@@ -6,7 +6,7 @@
 
 {{#if @model.people}}
   <ul class="people">
-    {{#each this.alphaPeople as |person|}}
+    {{#each this.sortedPeople as |person|}}
       <li class={{if person.completed "completed"}}>
         <input class="completed-checkbox" type="checkbox" checked={{person.completed}} {{on "click" (fn this.toggleCompleted person.uuid)}}/>
         <h5>{{person.name}}</h5>
